@@ -1,0 +1,87 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Build : MonoBehaviour {
+
+    private GameObject PlayerCursor;
+    private GameObject Mouse;
+    public Sprite BuildCursor;
+    private bool buildbool;
+    
+
+	// Use this for initialization
+	void Start ()
+    {
+        PlayerCursor = GameObject.Find("PlayerCursor");
+        Mouse = GameObject.Find("Mouse");
+    }
+	
+	// Update is called once per frame
+	void Update ()
+    {
+        // Baumenü aktivieren -----------------------------------------------------------------
+
+        int childcounterM = Mouse.transform.childCount;
+        int childcounterP = PlayerCursor.transform.childCount;
+
+        // Aktiviert
+        if (Input.GetKeyDown(KeyCode.B) && buildbool == false)
+        {
+            // Sprite Cursor setzen
+            PlayerCursor.GetComponent<SpriteRenderer>().sprite = BuildCursor;
+            buildbool = true;
+        }
+        // Deaktiviert
+        else if (Input.GetKeyDown(KeyCode.B) && buildbool == true)
+        {
+            // Sprite Cursor auf null setzen
+            PlayerCursor.GetComponent<SpriteRenderer>().sprite = null;
+            // Cursor wieder bei Charakter positionieren
+            PlayerCursor.transform.localPosition = new Vector3(0, 0);
+            buildbool = false;
+            if(childcounterP > 0)
+            {
+                Transform PlayerCursorChild = PlayerCursor.gameObject.transform.GetChild(0);
+                PlayerCursorChild.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+                PlayerCursorChild.transform.SetParent(Mouse.transform);
+            }
+
+        }
+        // Item von Drag and Drop zu PlayerCursor bei aktiviertem Baumenü
+        if (childcounterM > 0 && buildbool == true)
+        {
+            Transform Mousechild = Mouse.gameObject.transform.GetChild(0);
+            Mousechild.gameObject.GetComponent<SpriteRenderer>().enabled = true;
+            var spritetake = Mousechild.GetComponent<SpriteRenderer>();
+            spritetake.sortingOrder = 1;
+            Mousechild.transform.SetParent(PlayerCursor.transform);
+            Mousechild.transform.localPosition = new Vector3(0, 0);
+            Mousechild.transform.eulerAngles = new Vector3(0, 0, 0);
+        }
+
+        // Cursor = Mouse Position setzen ---------------------------------------------------------
+        if (buildbool == true)
+        {
+            // Cursor = Mouse Position setzen 
+            Vector3 mousePos = Input.mousePosition;
+            float x = mousePos.x;
+            float y = mousePos.y;
+            mousePos = new Vector3(x, y, +5);
+            mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+            PlayerCursor.transform.position = mousePos;
+        }
+
+        // Platzieren
+        if (childcounterP > 0 && Input.GetMouseButtonDown(0))
+        {
+            Transform PlayerCursorChild = PlayerCursor.gameObject.transform.GetChild(0);
+            var spritetake = PlayerCursorChild.GetComponent<SpriteRenderer>();
+            spritetake.sortingOrder = 1;
+            PlayerCursorChild.GetComponent<Collider2D>().enabled = true;
+            PlayerCursorChild.transform.SetParent(null);
+        }
+
+
+    }
+}
