@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Charakter
+  - Stein
+  - Rightarm
+  - Leftarm
+  - Hoe
+  - Baum
+  - Log
+  - Ast
+  - Spitzhacke
+  - Axt
+  - Blatt
+  - Haken
+  - Armour
+  - UI
+  - Fuel
+  - Tinderdrill
+  - waterfillable
+  - roastable
+  - Tooltip
+  - Building
+  - weapon
+  - mealtable
+  - heal
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - animalseating
+  - Player
+  - Slot
+  - Tile
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
