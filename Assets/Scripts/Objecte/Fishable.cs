@@ -19,7 +19,7 @@ public class Fishable : MonoBehaviour {
 		
 	}
 
-    void OnTriggerEnter2D(Collider2D col)
+ /*   void OnTriggerEnter2D(Collider2D col)
     {
         if (col.CompareTag("Haken"))
         {
@@ -33,5 +33,5 @@ public class Fishable : MonoBehaviour {
         {
             col.gameObject.GetComponent<SpriteRenderer>().enabled = true;
         }
-    }
+    }*/
 }

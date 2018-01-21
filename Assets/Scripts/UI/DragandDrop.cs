@@ -170,6 +170,7 @@ public class DragandDrop : MonoBehaviour
         for (int i = 1; i < childcounter; i++)
         {
                 Child = ObjectSlot.gameObject.transform.GetChild(childindex);
+                DeActivateSpriteChilds(Child.gameObject);
                 Child.transform.SetParent(Mouse.transform);
                 Child.GetComponent<Collider2D>().enabled = false;
                 Child.gameObject.GetComponentInChildren<SpriteRenderer>().enabled = false;
@@ -194,6 +195,7 @@ public class DragandDrop : MonoBehaviour
             Mousechild = Mouse.gameObject.transform.GetChild(0);
             var spritetake = Mousechild.GetComponent<SpriteRenderer>();
             spritetake.sortingOrder = 0;
+            DeActivateSpriteChilds(Mousechild.gameObject);
             Mousechild.transform.SetParent(Target.transform);
             Mousechild.transform.localPosition = new Vector3(0, 0, 0);
             Mousechild.transform.localScale = new Vector3(1, 1, 1);
@@ -201,6 +203,10 @@ public class DragandDrop : MonoBehaviour
             if (Mousechild.CompareTag("Armour") && Target.CompareTag("Armour"))
             {
                 Equipment.Instance.EquipItem(Mousechild.gameObject);
+            }
+            if(Target.name.Contains("Leftarm") || Target.name.Contains("Rightarm"))
+            {
+                ActivateSpriteChilds(Mousechild.gameObject);
             }
         }
         // Switch von Slot zwischen Maus
@@ -212,6 +218,37 @@ public class DragandDrop : MonoBehaviour
             Dropchild.transform.localPosition = new Vector3(0.12f, -0.12f, 0);
             var spritetake = Dropchild.GetComponent<SpriteRenderer>();
             spritetake.sortingOrder = 0;
+        }
+    }
+
+    public void ActivateSpriteChilds(GameObject Parent)
+    {
+        int childcounterP = Parent.transform.childCount;
+
+        if(childcounterP>0)
+        {
+            for (int i = 0; i < childcounterP; i++)
+            {
+                Transform Child = Parent.transform.GetChild(i);
+                Child.GetComponent<SpriteRenderer>().enabled = true;
+                print(Child.name);
+                ActivateSpriteChilds(Child.gameObject);
+            }
+        }
+    }
+    public void DeActivateSpriteChilds(GameObject Parent)
+    {
+        int childcounterP = Parent.transform.childCount;
+
+        if (childcounterP > 0)
+        {
+            for (int i = 0; i < childcounterP; i++)
+            {
+                Transform Child = Parent.transform.GetChild(i);
+                Child.GetComponent<SpriteRenderer>().enabled = false;
+                print(Child.name);
+                DeActivateSpriteChilds(Child.gameObject);
+            }
         }
     }
 }

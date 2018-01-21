@@ -141,28 +141,28 @@ AnimationClip:
       attribute: 4
       script: {fileID: 0}
       typeID: 4
-      customType: 14
+      customType: 4
       isPPtrCurve: 0
     - serializedVersion: 2
       path: 1835490537
       attribute: 4
       script: {fileID: 0}
       typeID: 4
-      customType: 14
+      customType: 4
       isPPtrCurve: 0
     - serializedVersion: 2
       path: 3222971703
       attribute: 4
       script: {fileID: 0}
       typeID: 4
-      customType: 14
+      customType: 4
       isPPtrCurve: 0
     - serializedVersion: 2
       path: 253308141
       attribute: 4
       script: {fileID: 0}
       typeID: 4
-      customType: 14
+      customType: 4
       isPPtrCurve: 0
     pptrCurveMapping: []
   m_AnimationClipSettings:
@@ -605,8 +605,22 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_GenerateMotionCurves: 0
   m_Events:
+  - time: 0
+    functionName: ActivateHaken
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 1.1666666
     functionName: PlayThrow
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 2
+    functionName: DeActivateHaken
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

@@ -31,6 +31,8 @@ public class Items : MonoBehaviour
     public Dictionary<string, int> fuelwerte;
     public Dictionary<string, int> Weapon;
     public Dictionary<string, bool> eatable;
+    public Dictionary<string, int> animalfood;
+    public Sprite spritedrop;
 
 
 
@@ -97,10 +99,15 @@ public class Items : MonoBehaviour
 
         // Listen
         Essensliste = new List<string>
-        { "Apple","Pear","Apple_roasted","Meat_roasted" };
+        { "Apple","Pear","Apple_roasted","Meat_roasted","Egg_fried" };
         Waterfilllist = new List<string> { "Leaf","Tinderdrill", "Flint" };
         Drinkinglist = new List<string> { "Leaf_water" };
         Heilungsliste = new List<string> { "Healpotion" };
+
+        // Werte für Animalfood
+        animalfood = new Dictionary<string, int>();
+        animalfood.Add("Gras", 10);
+        animalfood.Add("Egg", 10);
 
         // Werte für Heilung
         healwerte = new Dictionary<string, int>();
@@ -112,6 +119,7 @@ public class Items : MonoBehaviour
         essenswerte.Add("Apple_roasted", 10);
         essenswerte.Add("Pear", 5);
         essenswerte.Add("Meat_roasted", 20);
+        essenswerte.Add("Egg_fried", 15);
 
         eatable = new Dictionary<string, bool>();
         eatable.Add("Apple", true);
@@ -172,6 +180,7 @@ public class Items : MonoBehaviour
                 Rightarmchild.transform.SetParent(null);
                 holdingR = false;
                 isgrounded = true;
+                spritedrop = Rightarmchild.GetComponent<SpriteRenderer>();
                 spritedrop.sortingOrder = 1;
             }
         
@@ -185,6 +194,7 @@ public class Items : MonoBehaviour
                 Leftarmchild.transform.SetParent(null);
                 holdingL = false;
                 isgrounded = true;
+                spritedrop = Leftarmchild.GetComponent<SpriteRenderer>();
                 spritedrop.sortingOrder = 1;
             }       
     }

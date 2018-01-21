@@ -271,7 +271,7 @@ public class Chest : MonoBehaviour, ISerializable
         double posy = this.transform.position.y;
         double posz = this.transform.position.z;
 
-        // Kistenslots mit Items und deren Anzahl ausgelesen
+        // Kistenslots mit Items und deren Anzahl auslesen
         foreach (Transform Slot in ChestSlotpanel.transform)
         {
             int counterSlot = Slot.childCount;

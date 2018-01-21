@@ -23,14 +23,12 @@ public class SoundSettings : MonoBehaviour {
         Player.Add(Track2);
         Player.Add(Track3);
         Player.Add(Track4);
-
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
         PlayMusic();
-
     }
 
     public void PlaySound(string sound)

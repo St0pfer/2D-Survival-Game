@@ -189,4 +189,13 @@ public class FishingRod : MonoBehaviour
         }
 
     }
+
+    public void ActivateHaken()
+    {
+        Haken.gameObject.GetComponent<SpriteRenderer>().enabled = true;
+    }
+    public void DeActivateHaken()
+    {
+        Haken.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+    }
 }

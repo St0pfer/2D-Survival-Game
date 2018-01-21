@@ -44,10 +44,14 @@ public class AnimalCtrl : MonoBehaviour
     public Dictionary<string, int> Meatdrop;
     public Dictionary<string, int> Featherdrop;
     public Dictionary<string, int> Linendrop;
+    public Dictionary<string, int> Eggdrop;
+    public Dictionary<string, int> Wooldrop;
     public int fellcounter;
     public int fleischcounter;
     public int federcounter;
     public int linencounter;
+    public int eggcounter;
+    public int woolcounter;
 
 
     // Use this for initialization
@@ -73,7 +77,8 @@ public class AnimalCtrl : MonoBehaviour
         health.Add("Chicken", 90);
         health.Add("Fox", 100);
         health.Add("Deer", 150);
-        health.Add("Wolve", 200);
+        health.Add("Alpaca", 150);
+        health.Add("Wolve", 200);     
         health.Add("Bear", 300);
         // Start Leben setzen
         currentHealth = health[this.name];
@@ -93,6 +98,7 @@ public class AnimalCtrl : MonoBehaviour
         animaldamage.Add("Squirrel", 5);
         animaldamage.Add("Fox", 10);
         animaldamage.Add("Deer", 15);
+        animaldamage.Add("Alpaca", 15);
         animaldamage.Add("Wolve", 20);
         animaldamage.Add("Bear", 30);
 
@@ -125,6 +131,8 @@ public class AnimalCtrl : MonoBehaviour
         Meatdrop.Add("Opossum", 1);
         Meatdrop.Add("Squirrel", 1);
         Meatdrop.Add("Wolve", 3);
+        Meatdrop.Add("Alpaca", 2);
+
 
 
 
@@ -140,6 +148,18 @@ public class AnimalCtrl : MonoBehaviour
         //*****************************************************************//
         Linendrop = new Dictionary<string, int>();
         Linendrop.Add("Crawler", 1);
+
+        //*****************************************************************//
+        //  HIER Eggdrop EINFÜGEN                                        //
+        //*****************************************************************//
+        Eggdrop = new Dictionary<string, int>();
+        Eggdrop.Add("Chicken", 1);
+
+        //*****************************************************************//
+        //  HIER Wooldrop EINFÜGEN                                        //
+        //*****************************************************************//
+        Wooldrop = new Dictionary<string, int>();
+        Wooldrop.Add("Alpaca", 3);
     }
 
     // Update is called once per frame
@@ -218,12 +238,12 @@ public class AnimalCtrl : MonoBehaviour
         {
             sleeping = false;
         }
-        if (!death && myNightDayCircel.hour >= 20)
+        if (!death && myNightDayCircel.hour >= 20 && !searchitem)
         {
 
             sleeping = true;
         }
-        if(sleeping)
+        if(sleeping && !searchitem)
         {
             animator.SetBool("sleep", true);
         }
@@ -262,7 +282,7 @@ public class AnimalCtrl : MonoBehaviour
 
     void MoveRandom()
     {
-        if (moverandom == true)
+        if (moverandom == true && !sleeping)
         {
             speed = 0.5f;
             Targetposition = new Vector3(placeholderX, placeholderY, 0);
@@ -343,10 +363,16 @@ public class AnimalCtrl : MonoBehaviour
         if(Item != null && transform.position == Item.transform.position)
         {
             Items myItems = Item.GetComponent<Items>();
-            int value = myItems.essenswerte[Item.name];
-            this.SendMessage("Hungertimer", value);
-            Destroy(Item);
-            Item = null;
+           // int value = myItems.essenswerte[Item.name];
+            int value = 0;
+            myItems.animalfood.TryGetValue(Item.name, out value);
+            if (value > 0)
+            {
+                this.SendMessage("Hungertimer", value);
+                Destroy(Item);
+                Item = null;
+                value = 0;
+            }
         }
 
 
@@ -476,6 +502,8 @@ public class AnimalCtrl : MonoBehaviour
         int meat;
         int feather;
         int linen;
+        int egg;
+        int wool;
 
         if (Hidedrop.TryGetValue(this.name, out hide))
         { fellcounter = hide;   }
@@ -485,6 +513,10 @@ public class AnimalCtrl : MonoBehaviour
         { federcounter = feather; }
         if (Linendrop.TryGetValue(this.name, out linen))
         { linencounter = linen; }
+        if (Eggdrop.TryGetValue(this.name, out egg))
+        { eggcounter = egg; }
+        if (Wooldrop.TryGetValue(this.name, out wool))
+        { woolcounter = wool; }
 
 
         if (fleischcounter !=0)
@@ -495,6 +527,10 @@ public class AnimalCtrl : MonoBehaviour
             InstantItem("Feather", federcounter);
         if (linencounter != 0)
             InstantItem("Linen", linencounter);
+        if (eggcounter != 0)
+            InstantItem("Egg", eggcounter);
+        if (woolcounter != 0)
+            InstantItem("Wool", woolcounter);
     }
 
     public void InstantItem(string name, int amount)

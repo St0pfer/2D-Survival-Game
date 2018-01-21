@@ -45,6 +45,8 @@ public class Fire : MonoBehaviour {
         Fuelwaste();
     }
 
+
+    // Feuer anzündeun und löschen
     void OnTriggerStay2D(Collider2D col)
     {
         if (fuelcounter > 1) //  && col.transform.childCount == 0
@@ -126,7 +128,7 @@ public class Fire : MonoBehaviour {
             fueltimertmp = fueltimer;
         }
 
-        if (fuelcounter > 0 && animator.GetBool("fire")
+        if (fuelcounter > 1 && animator.GetBool("fire")
             && FuelChild.CompareTag("Fuel"))
         {
             gettimer = false;
@@ -140,6 +142,7 @@ public class Fire : MonoBehaviour {
                 Destroy((FuelChild as Transform).gameObject);
             }
         }
+        else { animator.SetBool("fire", false); }
     }
 
     public string ChooseProduct(string name)
@@ -155,6 +158,8 @@ public class Fire : MonoBehaviour {
             case "Meat": item = "Meat_roasted"; break;
             case "Mutton": item = "Mutton_roasted"; break;
             case "Sandpile": item = "Glas"; break;
+            case "Egg": item = "Egg_fried"; break;
+
             default: Debug.Log("error"); break;
         }
         return item;

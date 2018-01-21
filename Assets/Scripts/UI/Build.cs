@@ -79,9 +79,25 @@ public class Build : MonoBehaviour {
             var spritetake = PlayerCursorChild.GetComponent<SpriteRenderer>();
             spritetake.sortingOrder = 1;
             PlayerCursorChild.GetComponent<Collider2D>().enabled = true;
+            ActivateSpriteChilds(PlayerCursorChild.gameObject);
             PlayerCursorChild.transform.SetParent(null);
         }
 
+    }
 
+    public void ActivateSpriteChilds(GameObject Parent)
+    {
+        int childcounterP = Parent.transform.childCount;
+
+        if (childcounterP > 0)
+        {
+            for (int i = 0; i < childcounterP; i++)
+            {
+                Transform Child = Parent.transform.GetChild(i);
+                Child.GetComponent<SpriteRenderer>().enabled = true;
+                print(Child.name);
+                ActivateSpriteChilds(Child.gameObject);
+            }
+        }
     }
 }
