@@ -56,7 +56,10 @@ public class StackCrafting : MonoBehaviour
         GameObject Slot = GameObject.Find(this.name);
         if (slot)
         {
-            Name = this.GetComponent<Image>().sprite.name;
+            if (this.GetComponent<Image>() != null)
+            {
+                Name = this.GetComponent<Image>().sprite.name;
+            }
         }
 
 

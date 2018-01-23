@@ -27,6 +27,7 @@ public class MapGenerator : MonoBehaviour
     private Lottery<GameObject> itemSpawnLottery;
 
     public GameObject tile; //das Prefab mit einem SpriteRenderer drauf
+    public GameObject Tilemap;
 
     public Transform parent;    //Leeres GameObject, das alle Sprites enthält
     private Transform cameraTransform;   //Transform der Kamera
@@ -90,8 +91,22 @@ public class MapGenerator : MonoBehaviour
 
             GenerateItemSpawnLotteries();
             SpawnItems();
+            refreshScreen(); //SpriteRenderer erneuern
 
-            refreshScreen();    //SpriteRenderer erneuern
+            // Wassertile Colider hinzufügen, nicht passierbar machen und fischbar machen
+            int childcounterM = Tilemap.transform.childCount;
+            for (int i = 0; i < childcounterM; i++)
+            {
+                Transform Tile = Tilemap.transform.GetChild(i);
+                SpriteRenderer Renderer = Tile.gameObject.GetComponent<SpriteRenderer>();
+                if (Renderer.sprite.name == "water")
+                {
+                    Tile.GetComponent<BoxCollider2D>().enabled = true;
+                    Tile.GetComponent<BoxCollider2D>().isTrigger = false;
+                    Tile.GetComponent<BoxCollider2D>().size = new Vector2(0.2f, 0.2f);
+                    Tile.gameObject.AddComponent<Fishable>();
+                }
+            }
         }
     }
 
@@ -195,12 +210,14 @@ public class MapGenerator : MonoBehaviour
                 try
                 {
                     spriteRenderer[x, y].sprite = sprites[map[x + posX, y + posY]];  //setzt jedes SpriteRenderer auf den aktuellen Wert der Map }
-                    if(spriteRenderer[x, y].sprite.name == "water")
+                  /*  if(spriteRenderer[x, y].sprite.name == "water")
                     {
                         spriteRenderer[x, y].GetComponent<BoxCollider2D>().enabled = true;
+                        spriteRenderer[x, y].GetComponent<BoxCollider2D>().isTrigger = false;
+                        spriteRenderer[x, y].GetComponent<BoxCollider2D>().size = new Vector2(0.2f,0.2f);
                         spriteRenderer[x, y].gameObject.AddComponent<Fishable>();
                     }
-                    else { spriteRenderer[x, y].GetComponent<BoxCollider2D>().enabled = false; }
+                    else { spriteRenderer[x, y].GetComponent<BoxCollider2D>().enabled = false; }*/
   
                 }
                 catch (System.Exception ex)

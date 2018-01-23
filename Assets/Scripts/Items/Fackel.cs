@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Fackel : MonoBehaviour {
 
+    public Ctrl myCtrl;
+    public GameObject Charakter;
     public Animator animator;
     public Light Light;
     public GameObject LightGO;
@@ -12,13 +15,17 @@ public class Fackel : MonoBehaviour {
     public float switcher;
     public AudioSource AudioSource;
     public AudioClip fire;
+    public GameObject UI;
 
 	// Use this for initialization
 	void Start ()
     {
+        Charakter = GameObject.Find("Charakter");
+        myCtrl = Charakter.GetComponent<Ctrl>();
         SoundManager = GameObject.Find("SoundManager");
         switcher = 1;
         animator = GetComponent<Animator>();
+        UI.SetActive(false);
     }
 	
 	// Update is called once per frame
@@ -49,11 +56,26 @@ public class Fackel : MonoBehaviour {
 
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if (other.CompareTag("Tinderdrill"))
+        if (collision.CompareTag("Tinderdrill") && myCtrl.Wftiming == true && myCtrl.Wftimer < 0.5f)
         {
             lighton = true;
         }
+    }
+
+    public void ExtinguishFire()
+    {
+        lighton = false;
+        UI.SetActive(!UI.activeSelf);
+    }
+
+    private void OnMouseOver()
+    {
+            if (Input.GetMouseButtonDown(0))
+            {
+                UI.SetActive(!UI.activeSelf);
+            }
+
     }
 }

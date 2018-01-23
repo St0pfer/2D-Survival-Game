@@ -107,7 +107,11 @@ public class StackArms : MonoBehaviour {
                 Vector3 pos = Rightarm.transform.position;
                 float x = pos.x;
                 float y = pos.y;
-                ChildofSlot.transform.position = new Vector3(x, y - 0.1f, 1);
+                if(ChildofSlot.name == "Torch")
+                {
+                    ChildofSlot.transform.eulerAngles = new Vector3(0, 0, -60f);
+                }
+                ChildofSlot.transform.position = new Vector3(x, y - 0.1f, 0);
                 ChildofSlot.GetComponent<Collider2D>().enabled = true;
                 var spritetake = ChildofSlot.GetComponent<SpriteRenderer>();
                 spritetake.sortingOrder = 10;
@@ -117,7 +121,11 @@ public class StackArms : MonoBehaviour {
                 Vector3 pos = Leftarm.transform.position;
                 float x = pos.x;
                 float y = pos.y;
-                ChildofSlot.transform.position = new Vector3(x - 0.02f, y - 0.11f, 1);
+                if (ChildofSlot.name == "Torch")
+                {
+                    ChildofSlot.transform.eulerAngles = new Vector3(0, 0, -60f);
+                }
+                ChildofSlot.transform.position = new Vector3(x - 0.02f, y - 0.11f, 0);
                 ChildofSlot.GetComponent<Collider2D>().enabled = true;
                 var spritetake = ChildofSlot.GetComponent<SpriteRenderer>();
                 spritetake.sortingOrder = 4;

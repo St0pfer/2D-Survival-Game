@@ -47,6 +47,9 @@ public class Rezepte : MonoBehaviour
         Werkzeugliste.Add(Pickaxe_diamond);
         Buildinglist.Add(Chest);
         Buildinglist.Add(Oven);
+        Buildinglist.Add(Floor_wood);
+        Buildinglist.Add(Wall_wood);
+        Buildinglist.Add(Wallvertical_wood);
         Weaponlist.Add(Bow);
         Weaponlist.Add(Arrow_stone);
         Weaponlist.Add(Spear);
@@ -184,6 +187,12 @@ public Rezepte(string name,int LvL, int rescount,string buttonnumber, string Res
                                                 "Resources needed : 1xRope,5xTwig,1xStone");
     public static Rezepte Oven = new Rezepte("Oven", 0, 2, "2", "Stone", 10, "Clay", 10,"Melt Ores to Ingots or roast consumabels." +
                                             "Resources needed : 10xStone,10xClay");
+    public static Rezepte Floor_wood = new Rezepte("Floor_wood", 0, 2, "3", "Log", 1, "Resin", 1, "Built a wooden floor" +
+                                        "Resources needed : 1xLog, 1xResin");
+    public static Rezepte Wall_wood = new Rezepte("Wall_wood", 0, 2, "4", "Log", 1, "Resin", 1, "Built a wooden Wall" +
+                                    "Resources needed : 1xLog, 1xResin");
+    public static Rezepte Wallvertical_wood = new Rezepte("Wallvertical_wood", 0, 2, "5", "Log", 1, "Resin", 1, "Built a wooden Wall vertical" +
+                                "Resources needed : 1xLog, 1xResin");
 
     // Waffen Dropdownmenu value = 5
 

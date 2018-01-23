@@ -230,9 +230,11 @@ public class DragandDrop : MonoBehaviour
             for (int i = 0; i < childcounterP; i++)
             {
                 Transform Child = Parent.transform.GetChild(i);
-                Child.GetComponent<SpriteRenderer>().enabled = true;
-                print(Child.name);
-                ActivateSpriteChilds(Child.gameObject);
+                if (Child.GetComponent<SpriteRenderer>() != null)
+                {
+                    Child.GetComponent<SpriteRenderer>().enabled = true;
+                    ActivateSpriteChilds(Child.gameObject);
+                }
             }
         }
     }
@@ -245,9 +247,11 @@ public class DragandDrop : MonoBehaviour
             for (int i = 0; i < childcounterP; i++)
             {
                 Transform Child = Parent.transform.GetChild(i);
-                Child.GetComponent<SpriteRenderer>().enabled = false;
-                print(Child.name);
-                DeActivateSpriteChilds(Child.gameObject);
+                if (Child.GetComponent<SpriteRenderer>() != null)
+                {
+                    Child.GetComponent<SpriteRenderer>().enabled = false;
+                    DeActivateSpriteChilds(Child.gameObject);
+                }
             }
         }
     }

@@ -454,7 +454,7 @@ public class AnimalCtrl : MonoBehaviour
     private void Hungertimer(float hunger)
     {
         currentHunger += hunger;
-        currentHunger -= Time.deltaTime * 0.2f;
+        currentHunger -= Time.deltaTime * 0.05f;
         if (currentHunger > 100)
             currentHunger = 100;
         if (currentHunger < 0)
